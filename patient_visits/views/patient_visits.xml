@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_patient_visits_tree" model="ir.ui.view">
+            <field name="name">patient.visits.tree</field>
+            <field name="model">patient.visits</field>
+            <field name="arch" type="xml">
+                <tree string="Visitas de Pacientes">
+                    <field name="name"/>
+                    <field name="patient_id"/>
+                    <field name="date"/>
+                    <field name="reason"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_patient_visits_form" model="ir.ui.view">
+            <field name="name">patient.visits.form</field>
+            <field name="model">patient.visits</field>
+            <field name="arch" type="xml">
+                <form string="Visita de Paciente">
+                    <sheet>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="patient_id" required="1"/>
+                            <field name="date" required="1"/>
+                            <field name="reason" required="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        
+        <record id="action_patient_visits" model="ir.actions.act_window">
+            <field name="name">Visitas de Pacientes</field>
+            <field name="res_model">patient.visits</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_patient_visits_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_empty_folder">
+                    No hay visitas de pacientes registradas aún.
+                </p>
+            </field>
+        </record>
+                
+        <!-- menu principal -->
+        <menuitem id="patient_visits_menu_root"
+            name="Visitas de Pacientes"
+            web_icon="patient_visits,static/description/icon.png"
+            active="True"
+            sequence="30" />
+
+        <!-- Menu Pacientes -->
+        <menuitem id="menu_root_patient_visits" name="Visitas de Pacientes"
+            action="action_patient_visits"
+            parent="patient_visits_menu_root" sequence="1" />
+
+       
+
+    </data>
+</odoo>
